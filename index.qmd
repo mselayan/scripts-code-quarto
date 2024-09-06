@@ -2,7 +2,7 @@
 title: "Homework: Finding Your Way in R and Python"
 execute:
   error: true
-author: "Your Name"
+author: "Mohammad Elayan"
 output: html_document
 ---
 
@@ -18,7 +18,7 @@ Consider the 6 counting words examples in the [textbook module](https://srvander
 
 ---
 
-Replace this line of text with your 2-3 sentences about script-mode, interactive mode, and command-line mode in R and Python
+Interactive mode allows users to input and execute commands line-by-line, making it useful for quick experimentation. Script mode involves writing a sequence of commands in a file that can be executed all at once, which is ideal for automating tasks. Terminal mode allows for running scripts directly through the terminal, providing an efficient way to process tasks but without the immediate feedback that interactive mode offers.
 
 ---
 
@@ -35,7 +35,10 @@ Use the chunk below to define variables $a$, $b$, and $c$, where you define the 
 
 ```{r pythagorean-theorem-r}
 # Your pythagorean theorem code goes here
-
+a <- 2.5
+b <- 3
+csq <- a^2 + b^2
+c <- sqrt(csq)
 ```
 
 ## Quadratic Formula in Python
@@ -46,7 +49,12 @@ Use the chunk below to define variables $a$, $b$, and $c$, and then define $x1$ 
 
 ```{python quad-formula-py}
 # Your quadratic formula code goes here
-
+a = 2
+b = 3
+c = -4
+# Assuming we don't want to import cmath for the sqrt function:
+x1 = (-1 * b - (b**2 - 4*a*c)**0.5) / (2*a)
+x2 = (-1 * b + (b**2 - 4*a*c)**0.5) / (2*a)  
 ```
 
 # Debugging practice
@@ -74,11 +82,27 @@ salary
 
 ------------------------------------------------------------------------
 
-The problem with the data is:
+The problem with the data is: one of the salary values includes a comma and a dollar sign. This also suggests this value is a string.
 
-Here is how I solved the problem:
+Here is how I solved the problem: I first removed the dollar and comma using the gsub function. Since the $ sign is reserved in R (metacharacter), '\\$ is used instead in the gsub function. After that, I converted the Salary values to numeric. 
 
 ```{r cleaning-the-data-r}
 # Your implementation code goes here
+# This line reads in a tab-separated data file with a header naming the columns
+salary <- read.table("02-data.tsv", sep = "\t", header = T)
 
+# Using gsub to remove the dollar sign. "\\$" is used since $ is reserved (metacharacter)
+salary$Salary <- gsub("\\$", "", salary$Salary)  
+#Using gsub to remove the comma
+salary$Salary <- gsub(",", "", salary$Salary)
+# converting to numeric
+salary$Salary <- as.numeric(salary$Salary)      
+
+# This code plots labels for each individual at location (x, y)
+library(ggplot2)
+ggplot(salary, aes(x = Hire.Year, y = Salary, label = Name)) + 
+  geom_label()
+
+# This displays the salary object
+salary
 ```
