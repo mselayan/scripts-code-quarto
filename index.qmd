@@ -18,7 +18,7 @@ Consider the 6 counting words examples in the [textbook module](https://srvander
 
 ---
 
-Interactive mode allows users to input and execute commands line-by-line, making it useful for quick experimentation. Script mode involves writing a sequence of commands in a file that can be executed all at once, which is ideal for automating tasks. Terminal mode allows for running scripts directly through the terminal, providing an efficient way to process tasks but without the immediate feedback that interactive mode offers.
+Interactive mode allows users to input and execute commands line-by-line, making it useful for quick experimentation. Script mode involves writing a sequence of commands in a file that can be executed all at once, which is ideal for automating tasks and reproducibility. Terminal mode allows for running scripts directly through the terminal, providing an efficient way to automate and process tasks but without the immediate feedback that interactive mode offers.
 
 ---
 
@@ -39,6 +39,10 @@ a <- 2.5
 b <- 3
 csq <- a^2 + b^2
 c <- sqrt(csq)
+# Printing variables
+cat("a =", a, "\n")
+cat("b =", b, "\n")
+cat("c =", c, "\n")
 ```
 
 ## Quadratic Formula in Python
@@ -52,9 +56,20 @@ Use the chunk below to define variables $a$, $b$, and $c$, and then define $x1$ 
 a = 2
 b = 3
 c = -4
-# Assuming we don't want to import cmath for the sqrt function:
-x1 = (-1 * b - (b**2 - 4*a*c)**0.5) / (2*a)
-x2 = (-1 * b + (b**2 - 4*a*c)**0.5) / (2*a)  
+# Assuming we don't want to import math for the sqrt function:
+i = b**2 - 4*a*c
+
+# Calculation and printing
+print(f'a = {a}')
+print(f'b = {b}')
+print(f'c = {c}')
+if i >= 0:
+  x1 = (-1 * b - (i)**0.5) / (2*a)
+  x2 = (-1 * b + (i)**0.5) / (2*a) 
+  print(f'x1 = {x1}')
+  print(f'x2 = {x2}')
+else:
+    print('The value under the square root is negative!' )
 ```
 
 # Debugging practice
@@ -84,7 +99,7 @@ salary
 
 The problem with the data is: one of the salary values includes a comma and a dollar sign. This also suggests this value is a string.
 
-Here is how I solved the problem: I first removed the dollar and comma using the gsub function. Since the $ sign is reserved in R (metacharacter), '\\$ is used instead in the gsub function. After that, I converted the Salary values to numeric. 
+Here is how I solved the problem: I first removed the dollar and comma using the gsub function. Since the $ sign is reserved in R (metacharacter), //$ is used in the gsub function instead. After that, I converted the cleaned up Salary values to numeric. 
 
 ```{r cleaning-the-data-r}
 # Your implementation code goes here
